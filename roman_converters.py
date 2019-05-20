@@ -15,7 +15,10 @@ def dec_to_rom(number):
     """
     
     if type(number) != int:
-        raise TypeError
+        try:
+            number = int(number)
+        except:
+            raise TypeError
     
     main_values = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
     symbols = {1000:"M", 900:"CM", 500:"D", 400:"CD", 100:"C", 90:"XC",
@@ -48,7 +51,7 @@ def dec_to_rom(number):
         return "".join(["(", thousands_r, ")", remain_after_thousands_r])
     
     while number > 0:
-        for i in range(len(symbols)):
+        for i in range(len(main_values)):
             while number >= main_values[i]:
                 number -= main_values[i]
                 output += symbols[main_values[i]]
@@ -89,7 +92,6 @@ def rom_to_dec(roman):
             
             if a >= b:
                 states.append(1)
-                
             else:
                 states.append(0)
                 
@@ -111,3 +113,23 @@ def rom_to_dec(roman):
         print("%s is not a Roman number. %d is represented by %s." % (roman, output, dec_to_rom(output)))
         return output
     
+if __name__ == "__main__":
+    mode = 0
+    print("Converting from decimal to Roman numerals.")
+    while True:
+        user_input = input("Provide input or type SWITCH to change mode. ")
+        if user_input.lower() != "switch":
+            try:
+                if mode == 0:
+                    print(dec_to_rom(user_input))
+                else:
+                    print(rom_to_dec(user_input))
+            except:
+                print("Please provide the right format of input.")
+        else:
+            if mode == 0:
+                mode = 1
+                print("Converting from Roman numerals to decimal.")
+            else:
+                mode = 0
+                print("Converting from decimal to Roman numerals.")
