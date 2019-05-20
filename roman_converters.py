@@ -115,7 +115,7 @@ def rom_to_dec(roman):
     
 if __name__ == "__main__":
     mode = 0
-    print("Converting from decimal to Roman numerals.")
+    print("\n\nConverting from decimal to Roman numerals.")
     while True:
         user_input = input("Provide input or type SWITCH to change mode. ")
         if user_input.lower() != "switch":
