@@ -64,4 +64,57 @@ def dec_to_rom(number):
 
 def rom_to_dec(roman):
     
-    pass
+    roman_2 = roman.upper()
+    symbols = {"I":1, "V":5, "X":10, "L":50, "C":100, "D":500, "M":1000}
+    i = 0 # need to rename this
+    states = []
+    output = 0
+    brackets = roman_2.count("(")
+    
+    while brackets:
+        
+        if roman_2 == "()":
+            roman_2 = ""
+            break
+            
+        opening_bracket = roman_2.rindex("(")
+        closing_bracket = roman_2.index(")")
+        bracketed = roman_2[opening_bracket+1:closing_bracket]
+        roman_2 = roman_2[:opening_bracket] + roman_2[closing_bracket+1:]
+        output += rom_to_dec(bracketed) * 1000 ** brackets
+        brackets -= 1
+        
+    while i < len(roman_2):
+        
+        if i != len(roman_2) - 1:
+            
+            a = symbols[roman_2[i]] # rename a
+            b = symbols[roman_2[i+1]] # rename b
+            
+            if a >= b:
+                states.append(1)
+                
+            else:
+                states.append(0)
+                
+        i += 1
+        
+    if roman_2:
+        
+        output += symbols[roman_2[-1]]
+        
+    for place in range(len(states)):
+        
+        if states[place]:
+            output += symbols[roman_2[place]]
+        else:
+            output -= symbols[roman_2[place]]
+            
+    if dec_to_rom(output) == roman.upper():
+        
+        return output
+    
+    else:
+        
+        print("%s is not a Roman number. %d is represented by %s." % (roman, output, dec_to_rom(output)))
+        return output
