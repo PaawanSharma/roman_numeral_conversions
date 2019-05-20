@@ -58,6 +58,11 @@ def dec_to_rom(number):
 
 def rom_to_dec(roman):
     
+    """
+    Takes in a Roman numeral string and output that number in decimal.
+    Also can provide some feedback on incorrect Roman numerals (e.g., IIIIII)
+    """
+    
     roman_2 = roman.upper()
     symbols = {"I":1, "V":5, "X":10, "L":50, "C":100, "D":500, "M":1000}
     i = 0 # need to rename this
@@ -105,3 +110,4 @@ def rom_to_dec(roman):
     else:
         print("%s is not a Roman number. %d is represented by %s." % (roman, output, dec_to_rom(output)))
         return output
+    
