@@ -30,37 +30,31 @@ def dec_to_rom(number):
         remain_after_thousands_r = dec_to_rom(remain_after_thousands)
         
         while thousands_r[-1] == "I":
-            
             thousands -= 1
             thousands_r = dec_to_rom(thousands)
             remain_after_thousands = number - thousands * 1000
             remain_after_thousands_r = dec_to_rom(remain_after_thousands)
             
         try:
-            
             while thousands_r[-1] == "V" and thousands_r[-2] == "I":
-                
                 thousands -= 4
                 thousands_r = dec_to_rom(thousands)
                 remain_after_thousands += 4000
                 remain_after_thousands_r = dec_to_rom(remain_after_thousands)
                 
         except IndexError:
-            
             pass
         
         return "".join(["(", thousands_r, ")", remain_after_thousands_r])
     
     while number > 0:
-        
         for i in range(len(symbols)):
-            
             while number >= main_values[i]:
-                
                 number -= main_values[i]
                 output += symbols[main_values[i]]
             
     return output
+
 
 def rom_to_dec(roman):
     
@@ -69,10 +63,9 @@ def rom_to_dec(roman):
     i = 0 # need to rename this
     states = []
     output = 0
-    brackets = roman_2.count("(")
     
+    brackets = roman_2.count("(")
     while brackets:
-        
         if roman_2 == "()":
             roman_2 = ""
             break
@@ -85,9 +78,7 @@ def rom_to_dec(roman):
         brackets -= 1
         
     while i < len(roman_2):
-        
         if i != len(roman_2) - 1:
-            
             a = symbols[roman_2[i]] # rename a
             b = symbols[roman_2[i+1]] # rename b
             
@@ -100,21 +91,17 @@ def rom_to_dec(roman):
         i += 1
         
     if roman_2:
-        
         output += symbols[roman_2[-1]]
         
     for place in range(len(states)):
-        
         if states[place]:
             output += symbols[roman_2[place]]
         else:
             output -= symbols[roman_2[place]]
             
     if dec_to_rom(output) == roman.upper():
-        
         return output
     
     else:
-        
         print("%s is not a Roman number. %d is represented by %s." % (roman, output, dec_to_rom(output)))
         return output
