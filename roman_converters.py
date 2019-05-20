@@ -112,12 +112,12 @@ def rom_to_dec(roman):
     else:
         print("%s is not a Roman number. %d is represented by %s." % (roman, output, dec_to_rom(output)))
         return output
-    
-if __name__ == "__main__":
+
+def main():
     mode = 0
     print("\n\nConverting from decimal to Roman numerals.")
     while True:
-        user_input = input("Provide input or type SWITCH to change mode. ")
+        user_input = input("Provide input or type SWITCH to change mode.\n")
         if user_input.lower() != "switch":
             try:
                 if mode == 0:
@@ -133,3 +133,6 @@ if __name__ == "__main__":
             else:
                 mode = 0
                 print("Converting from decimal to Roman numerals.")
+
+if __name__ == "__main__":
+    main()
